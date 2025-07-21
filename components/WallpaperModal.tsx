@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Download, Heart, Share, Info } from 'lucide-react'
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 interface Wallpaper {
   id: string
@@ -23,6 +23,26 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
   const [isLiked, setIsLiked] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isOpen) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape)
+      // Prevent body scroll when modal is open
+      document.body.style.overflow = 'hidden'
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = 'unset'
+    }
+  }, [isOpen, onClose])
+
   if (!wallpaper) return null
 
   return (
@@ -32,15 +52,16 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer"
           onClick={onClose}
+          title="Click to close"
         >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/85 backdrop-blur-md"
           />
 
           {/* Modal Content */}
@@ -49,7 +70,7 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.5, opacity: 0 }}
             transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
-            className="relative max-w-7xl max-h-[90vh] w-full h-full glass rounded-3xl overflow-hidden"
+            className="relative max-w-7xl max-h-[90vh] w-full h-full glass rounded-3xl overflow-hidden cursor-default"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
@@ -78,9 +99,10 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={onClose}
-                    className="p-2 glass glass-hover rounded-full text-white hover:text-red-400 transition-colors"
+                    className="p-3 bg-black/60 hover:bg-red-500/80 rounded-full text-white hover:text-white transition-all duration-300 border border-white/30 hover:border-red-400/50 shadow-lg backdrop-blur-sm"
+                    aria-label="Close modal"
                   >
-                    <X className="w-6 h-6" />
+                    <X className="w-6 h-6 stroke-2" />
                   </motion.button>
                 </div>
               </div>
