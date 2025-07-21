@@ -1,0 +1,369 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    @apply font-space;
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  body.dark {
+    @apply bg-dark-bg text-white;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+  }
+  
+  body:not(.dark) {
+    @apply bg-white text-gray-800;
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%, #ffffff 100%);
+  }
+}
+
+@layer components {
+  .glass {
+    @apply backdrop-blur-md border transition-all duration-300;
+  }
+  
+  .dark .glass {
+    @apply bg-white/5 border-white/10;
+  }
+  
+  body:not(.dark) .glass {
+    @apply bg-white/60 border-gray-200/60 shadow-lg;
+  }
+  
+  .glass-hover {
+    @apply transition-all duration-300;
+  }
+  
+  .dark .glass-hover:hover {
+    @apply bg-white/10 border-white/20;
+  }
+  
+  body:not(.dark) .glass-hover:hover {
+    @apply bg-white/80 border-gray-300/80 shadow-xl;
+  }
+  
+  .neon-glow {
+    @apply shadow-[0_0_20px_rgba(0,255,255,0.3)];
+  }
+  
+  .neon-text {
+    @apply text-transparent bg-clip-text transition-all duration-300;
+  }
+  
+  .dark .neon-text {
+    @apply bg-gradient-to-r from-neon-blue via-neon-purple to-neon-pink;
+  }
+  
+  body:not(.dark) .neon-text {
+    @apply bg-gradient-to-r from-blue-700 via-purple-700 to-pink-700;
+  }
+  
+  .dark .gradient-bg {
+    background: linear-gradient(135deg, 
+      rgba(0, 255, 255, 0.1) 0%, 
+      rgba(139, 92, 246, 0.1) 25%, 
+      rgba(255, 0, 255, 0.1) 50%, 
+      rgba(0, 255, 0, 0.1) 75%, 
+      rgba(0, 255, 255, 0.1) 100%);
+  }
+  
+  body:not(.dark) .gradient-bg {
+    background: linear-gradient(135deg, 
+      rgba(59, 130, 246, 0.15) 0%, 
+      rgba(139, 92, 246, 0.15) 25%, 
+      rgba(236, 72, 153, 0.15) 50%, 
+      rgba(34, 197, 94, 0.15) 75%, 
+      rgba(59, 130, 246, 0.15) 100%);
+  }
+  
+  .card-hover {
+    @apply transform transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+  }
+  
+  .wallpaper-grid {
+    @apply grid gap-4 auto-rows-fr;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  
+  .wallpaper-grid-mobile {
+    @apply grid gap-4 auto-rows-fr;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  
+  /* Light mode specific improvements */
+  body:not(.dark) .text-white {
+    @apply text-gray-800;
+  }
+  
+  body:not(.dark) .text-white\/80 {
+    @apply text-gray-700;
+  }
+  
+  body:not(.dark) .text-white\/60 {
+    @apply text-gray-600;
+  }
+  
+  body:not(.dark) .text-white\/40 {
+    @apply text-gray-500;
+  }
+  
+  /* Light mode button improvements */
+  body:not(.dark) .bg-gradient-to-r.from-neon-blue.to-neon-purple {
+    @apply from-blue-600 to-purple-600;
+  }
+  
+  body:not(.dark) .from-neon-blue.via-neon-purple.to-neon-pink {
+    @apply from-blue-600 via-purple-600 to-pink-600;
+  }
+  
+  body:not(.dark) .from-neon-purple.to-neon-pink {
+    @apply from-purple-600 to-pink-600;
+  }
+  
+  /* Light mode card improvements */
+  body:not(.dark) .bg-dark-card {
+    @apply bg-white border border-gray-200;
+  }
+  
+  /* Light mode header improvements */
+  body:not(.dark) .border-white\/10 {
+    @apply border-gray-200/80;
+  }
+  
+  body:not(.dark) .border-white\/20 {
+    @apply border-gray-300/80;
+  }
+  
+  /* Light mode neon colors adjustments */
+  body:not(.dark) .text-neon-blue {
+    @apply text-blue-600;
+  }
+  
+  body:not(.dark) .text-neon-purple {
+    @apply text-purple-600;
+  }
+  
+  body:not(.dark) .text-neon-pink {
+    @apply text-pink-600;
+  }
+  
+  body:not(.dark) .text-neon-green {
+    @apply text-emerald-600;
+  }
+  
+  /* Light mode shadow improvements */
+  body:not(.dark) .shadow-lg {
+    @apply shadow-xl shadow-gray-200/50;
+  }
+  
+  body:not(.dark) .shadow-2xl {
+    @apply shadow-2xl shadow-gray-300/50;
+  }
+  
+  /* Category Toggle Text Visibility Fix */
+  .category-toggle-text {
+    position: relative;
+    z-index: 20;
+    pointer-events: none;
+  }
+  
+  .category-toggle-button {
+    position: relative;
+    z-index: 10;
+    /* Prevent text flickering during animations */
+    transform: translateZ(0);
+    will-change: transform;
+  }
+  
+  .category-toggle-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  /* Ensure text visibility in both themes */
+  .dark .category-toggle-inactive {
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.3s ease;
+  }
+  
+  .dark .category-toggle-inactive:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+  
+  body:not(.dark) .category-toggle-inactive {
+    color: rgba(75, 85, 99, 1);
+    transition: color 0.3s ease;
+  }
+  
+  body:not(.dark) .category-toggle-inactive:hover {
+    color: rgba(55, 65, 81, 1);
+  }
+  
+  /* Fix any text selection issues */
+  .category-toggle-button * {
+    user-select: none;
+  }
+  
+  /* Improve button stability */
+  .category-toggle-button:active {
+    transform: translateZ(0) scale(0.95);
+  }
+  
+  /* Ensure proper layering for glass effect */
+  .glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+
+  /* Header spacing fixes */
+  .header-spacing {
+    padding-top: 5rem; /* 80px for mobile */
+  }
+  
+  @media (min-width: 768px) {
+    .header-spacing {
+      padding-top: 6rem; /* 96px for desktop */
+    }
+  }
+  
+  /* Mobile navigation improvements */
+  @media (max-width: 767px) {
+    .mobile-nav-open {
+      padding-bottom: 2rem;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.2));
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    
+    .mobile-safe-area {
+      padding-top: env(safe-area-inset-top, 0);
+    }
+    
+    /* Prevent content jumping when mobile menu opens */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 40;
+    }
+    
+    /* Mobile header height adjustments */
+    .mobile-header {
+      min-height: 4rem;
+    }
+  }
+  
+  /* Ensure content doesn't get covered by fixed header */
+  main {
+    scroll-margin-top: 6rem;
+  }
+  
+  section {
+    scroll-margin-top: 6rem;
+  }
+  
+  /* Smooth scroll offset for mobile */
+  @media (max-width: 767px) {
+    main {
+      scroll-margin-top: 5rem;
+    }
+    
+    section {
+      scroll-margin-top: 5rem;
+    }
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  @apply bg-dark-bg;
+}
+
+body:not(.dark) ::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  @apply bg-neon-blue/30 rounded-full;
+}
+
+body:not(.dark) ::-webkit-scrollbar-thumb {
+  @apply bg-blue-500/40 rounded-full;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  @apply bg-neon-blue/50;
+}
+
+body:not(.dark) ::-webkit-scrollbar-thumb:hover {
+  @apply bg-blue-500/60;
+}
+
+/* Loading animation */
+.loading-dots {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.loading-dots div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #00ffff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+
+.loading-dots div:nth-child(1) {
+  left: 8px;
+  animation: loading1 0.6s infinite;
+}
+
+.loading-dots div:nth-child(2) {
+  left: 8px;
+  animation: loading2 0.6s infinite;
+}
+
+.loading-dots div:nth-child(3) {
+  left: 32px;
+  animation: loading2 0.6s infinite;
+}
+
+.loading-dots div:nth-child(4) {
+  left: 56px;
+  animation: loading3 0.6s infinite;
+}
+
+@keyframes loading1 {
+  0% { transform: scale(0); }
+  100% { transform: scale(1); }
+}
+
+@keyframes loading3 {
+  0% { transform: scale(1); }
+  100% { transform: scale(0); }
+}
+
+@keyframes loading2 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(24px, 0); }
+} 

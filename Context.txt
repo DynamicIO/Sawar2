@@ -1,0 +1,89 @@
+Build a React modern, animated, and fully responsive wallpaper hosting website called 'Sawar'. This site allows users to browse and download stunning wallpapers categorized for PC and Mobile devices.
+🖼️ Provided:
+
+    Use Next.js (App Router) for optimal performance and routing
+
+    All wallpapers are preloaded, stored locally in the PC and Mobile folders
+
+    Two categories:
+
+        PC wallpapers (e.g., 16:9, 21:9) The preview tiles should be 16:9 size
+
+        Mobile wallpapers (e.g., 9:16, iPhone-style) The preview tiles should be 9:16 size
+
+✨ Design & Aesthetic (Web3-Style):
+
+    Use Tailwind CSS and modern design patterns like glassmorphism, soft gradients, neon highlights, and futuristic fonts
+
+    Implement smooth animations with Framer Motion (or GSAP if preferred)
+
+    Dark theme by default with a toggle to light mode
+
+    Hero section with glow/glass backdrop
+
+    Animated image grid for wallpapers with hover scaling, blur reveal effects, or parallax tilt
+
+    Responsive design: Works on desktop, tablet, and all mobile devices
+
+🔍 User Flow & Features:
+
+    Landing page shows featured wallpapers and category filter: PC | Mobile
+
+    Grid view shows wallpaper thumbnails with resolution badges
+
+    Each wallpaper opens a modal or dynamic route to preview and download
+
+    Download button should downlaod the image with a confirmation pop up
+
+    Include functionality to filter by tags (optional future)
+
+    Wallpaper should load fast and smooth
+
+    The website should be responsive and work on all devices
+
+    The website should be optimized for performance and future scalability
+
+    The website should be unique and modern and not like any other wallpaper website.
+
+    The website should be SEO friendly and optimized and have a good user experience.
+
+    The website should be fast and smooth and have a good user experience.
+
+    "Powered by Dynamic.IO" should be in the footer.
+
+
+🛠 Tech Stack & Libraries:
+
+    Tailwind CSS for styling
+
+    Framer Motion for animations
+
+    Use public/wallpapers/pc/ and public/wallpapers/mobile/ for image folders
+
+🧱 Components to Build:
+
+    WallpaperGrid (animated, responsive)
+
+    WallpaperCard (thumbnail, hover info, download)
+
+    WallpaperModal or WallpaperPage
+
+    CategoryToggle (PC / Mobile)
+
+    DarkModeToggle
+
+    Header, Footer, TrustBadge, HeroSection
+    
+    "Powered by Dynamic.IO"
+
+✅ Must-Haves:
+
+    Fully working on all devices
+
+    Smooth animations on navigation and image interactions
+
+    No bugs, clean modular component structure
+
+    Optimized for performance and future scalability
+
+This website should be unique and modern and not like any other wallpaper website.
