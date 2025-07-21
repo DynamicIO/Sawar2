@@ -3,7 +3,7 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Download, Heart, Share, Info } from 'lucide-react'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 interface Wallpaper {
   id: string
@@ -23,26 +23,6 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
   const [isLiked, setIsLiked] = useState(false)
   const [showInfo, setShowInfo] = useState(false)
 
-  // Handle Escape key to close modal
-  useEffect(() => {
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && isOpen) {
-        onClose()
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener('keydown', handleEscape)
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden'
-    }
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen, onClose])
-
   if (!wallpaper) return null
 
   return (
@@ -52,16 +32,15 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
           onClick={onClose}
-          title="Click to close"
         >
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-black/85 backdrop-blur-md"
+            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           />
 
           {/* Modal Content */}
@@ -70,11 +49,11 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.5, opacity: 0 }}
             transition={{ type: "spring", bounce: 0.3, duration: 0.6 }}
-            className="relative max-w-7xl max-h-[90vh] w-full h-full glass rounded-3xl overflow-hidden cursor-default"
+            className="relative max-w-7xl max-h-[90vh] w-full h-full glass rounded-3xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
-            <div className="absolute top-0 left-0 right-0 z-10 p-6 bg-gradient-to-b from-black/50 to-transparent">
+            <div className="absolute top-0 left-0 right-0 z-10 p-6 bg-gradient-to-b from-black/50 to-transparent hidden md:block">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <h2 className="text-2xl font-bold text-white truncate max-w-md">
@@ -99,14 +78,23 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                     onClick={onClose}
-                    className="p-3 bg-black/60 hover:bg-red-500/80 rounded-full text-white hover:text-white transition-all duration-300 border border-white/30 hover:border-red-400/50 shadow-lg backdrop-blur-sm"
-                    aria-label="Close modal"
+                    className="p-2 glass glass-hover rounded-full text-white hover:text-red-400 transition-colors"
                   >
-                    <X className="w-6 h-6 stroke-2" />
+                    <X className="w-6 h-6" />
                   </motion.button>
                 </div>
               </div>
             </div>
+
+            {/* Mobile Close Button - Larger for touch */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={onClose}
+              className="absolute top-4 right-4 z-20 md:hidden p-4 bg-black/70 backdrop-blur-sm rounded-full text-white hover:text-red-400 transition-colors border-2 border-white/20"
+            >
+              <X className="w-8 h-8" />
+            </motion.button>
 
             {/* Image */}
             <div className="relative w-full h-full flex items-center justify-center">
@@ -121,7 +109,7 @@ export default function WallpaperModal({ wallpaper, isOpen, onClose, onDownload 
             </div>
 
             {/* Footer Actions */}
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/50 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/50 to-transparent hidden md:block">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <motion.button

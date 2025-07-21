@@ -69,9 +69,8 @@ export default function Footer() {
             <div className="flex items-center justify-center space-x-2 dark:text-white/80 text-gray-700">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500 fill-current animate-pulse" />
-              <span>•</span>
               <motion.a
-                href="https://dynamic.io"
+                href="https://dynamicio.vercel.app/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

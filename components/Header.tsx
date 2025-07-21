@@ -87,11 +87,8 @@ export default function Header({ activeCategory, activeSection, onCategoryChange
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToHome}
-            className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity duration-300"
+            className="cursor-pointer hover:opacity-80 transition-opacity duration-300"
           >
-            <div className="w-8 h-8 bg-gradient-to-r from-neon-blue to-neon-purple rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">S</span>
-            </div>
             <h1 className="text-2xl font-cyber font-bold neon-text">Sawar</h1>
           </motion.button>
 
